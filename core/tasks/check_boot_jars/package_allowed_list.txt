@@ -273,3 +273,5 @@ org\.ifaa\.android\.manager.*
 com\.nvidia\.*
 com\.nvidia\.profilemanager\.*
 com\.nvidia\.NvCPLSvc\.*
+vendor\.waydroid\.window\.V1_0
+vendor\.waydroid\.window\.V1_1
