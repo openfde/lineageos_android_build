@@ -33,11 +33,11 @@ define generate-common-build-props
     echo "# from generate-common-build-props" >> $(2);\
     echo "# These properties identify this partition image." >> $(2);\
     echo "####################################" >> $(2);\
-    echo "ro.product.$(1).brand=$(PRODUCT_BRAND)" >> $(2);\
-    echo "ro.product.$(1).device=$(TARGET_DEVICE)" >> $(2);\
-    echo "ro.product.$(1).manufacturer=$(PRODUCT_MANUFACTURER)" >> $(2);\
-    echo "ro.product.$(1).model=$(PRODUCT_MODEL)" >> $(2);\
-    echo "ro.product.$(1).name=$(TARGET_PRODUCT)" >> $(2);\
+    echo "ro.product.$(1).brand=$(if $(strip $(MOCK_PRODUCT_BRAND)),$(MOCK_PRODUCT_BRAND),$(PRODUCT_BRAND))" >> $(2);\
+    echo "ro.product.$(1).device=$(if $(strip $(MOCK_TARGET_DEVICE)),$(MOCK_TARGET_DEVICE),$(TARGET_DEVICE))" >> $(2);\
+    echo "ro.product.$(1).manufacturer=$(if $(strip $(MOCK_PRODUCT_MANUFACTURER)),$(MOCK_PRODUCT_MANUFACTURER),$(PRODUCT_MANUFACTURER))" >> $(2);\
+    echo "ro.product.$(1).model=$(if $(strip $(MOCK_PRODUCT_MODEL)),$(MOCK_PRODUCT_MODEL),$(PRODUCT_MODEL))" >> $(2);\
+    echo "ro.product.$(1).name=$(if $(strip $(MOCK_TARGET_PRODUCT)),$(MOCK_TARGET_PRODUCT),$(TARGET_PRODUCT))" >> $(2);\
     if [ -n "$(strip $(PRODUCT_MODEL_FOR_ATTESTATION))" ]; then \
         echo "ro.product.model_for_attestation=$(PRODUCT_MODEL_FOR_ATTESTATION)" >> $(2);\
     fi; \

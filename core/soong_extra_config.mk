@@ -11,22 +11,22 @@ $(call add_json_str, Dex2oatTargetInstructionSetFeatures,    $(DEX2OAT_TARGET_IN
 $(call add_json_str, SecondaryDex2oatCpuVariantRuntime,      $($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_CPU_VARIANT_RUNTIME))
 $(call add_json_str, SecondaryDex2oatInstructionSetFeatures, $($(TARGET_2ND_ARCH_VAR_PREFIX)DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES))
 
-$(call add_json_str, BoardPlatform,          $(TARGET_BOARD_PLATFORM))
+$(call add_json_str, BoardPlatform,          $(if $(strip $(MOCK_TARGET_BOARD_PLATFORM)),$(MOCK_TARGET_BOARD_PLATFORM),$(TARGET_BOARD_PLATFORM)))
 $(call add_json_str, BoardShippingApiLevel,  $(BOARD_SHIPPING_API_LEVEL))
 $(call add_json_str, ShippingApiLevel,       $(PRODUCT_SHIPPING_API_LEVEL))
 
-$(call add_json_str, ProductModel,                      $(PRODUCT_MODEL))
+$(call add_json_str, ProductModel,                      $(if $(strip $(MOCK_PRODUCT_MODEL)),$(MOCK_PRODUCT_MODEL),$(PRODUCT_MODEL)))
 $(call add_json_str, ProductModelForAttestation,        $(PRODUCT_MODEL_FOR_ATTESTATION))
 $(call add_json_str, ProductBrandForAttestation,        $(PRODUCT_BRAND_FOR_ATTESTATION))
 $(call add_json_str, ProductNameForAttestation,         $(PRODUCT_NAME_FOR_ATTESTATION))
 $(call add_json_str, ProductDeviceForAttestation,       $(PRODUCT_DEVICE_FOR_ATTESTATION))
 $(call add_json_str, ProductManufacturerForAttestation, $(PRODUCT_MANUFACTURER_FOR_ATTESTATION))
 
-$(call add_json_str, SystemBrand, $(PRODUCT_SYSTEM_BRAND))
-$(call add_json_str, SystemDevice, $(PRODUCT_SYSTEM_DEVICE))
-$(call add_json_str, SystemManufacturer, $(PRODUCT_SYSTEM_MANUFACTURER))
-$(call add_json_str, SystemModel, $(PRODUCT_SYSTEM_MODEL))
-$(call add_json_str, SystemName, $(PRODUCT_SYSTEM_NAME))
+$(call add_json_str, SystemBrand, $(if $(strip $(MOCK_PRODUCT_SYSTEM_BRAND)),$(MOCK_PRODUCT_SYSTEM_BRAND),$(PRODUCT_SYSTEM_BRAND)))
+$(call add_json_str, SystemDevice, $(if $(strip $(MOCK_PRODUCT_SYSTEM_DEVICE)),$(MOCK_PRODUCT_SYSTEM_DEVICE),$(PRODUCT_SYSTEM_DEVICE)))
+$(call add_json_str, SystemManufacturer, $(if $(strip $(MOCK_PRODUCT_SYSTEM_MANUFACTURER)),$(MOCK_PRODUCT_SYSTEM_MANUFACTURER),$(PRODUCT_SYSTEM_MANUFACTURER)))
+$(call add_json_str, SystemModel, $(if $(strip $(MOCK_PRODUCT_SYSTEM_MODEL)),$(MOCK_PRODUCT_SYSTEM_MODEL),$(PRODUCT_SYSTEM_MODEL)))
+$(call add_json_str, SystemName, $(if $(strip $(MOCK_PRODUCT_SYSTEM_NAME)),$(MOCK_PRODUCT_SYSTEM_NAME),$(PRODUCT_SYSTEM_NAME)))
 
 $(call add_json_list, PRODUCT_SYSTEM_PROPERTIES,         $(call collapse-prop-pairs,PRODUCT_SYSTEM_PROPERTIES))
 $(call add_json_list, PRODUCT_SYSTEM_DEFAULT_PROPERTIES, $(call collapse-prop-pairs,PRODUCT_SYSTEM_DEFAULT_PROPERTIES))
@@ -37,7 +37,7 @@ $(call add_json_list, PRODUCT_ODM_PROPERTIES,            $(call collapse-prop-pa
 $(call add_json_list, PRODUCT_PROPERTY_OVERRIDES,        $(call collapse-prop-pairs,PRODUCT_PROPERTY_OVERRIDES))
 $(call add_json_list, PRODUCT_DEFAULT_PROPERTY_OVERRIDES,        $(call collapse-prop-pairs,PRODUCT_DEFAULT_PROPERTY_OVERRIDES))
 
-$(call add_json_str, BootloaderBoardName, $(TARGET_BOOTLOADER_BOARD_NAME))
+$(call add_json_str, BootloaderBoardName, $(if $(strip $(MOCK_TARGET_BOOTLOADER_BOARD_NAME)),$(MOCK_TARGET_BOOTLOADER_BOARD_NAME),$(TARGET_BOOTLOADER_BOARD_NAME)))
 
 $(call add_json_bool, SdkBuild, $(filter sdk sdk_addon,$(MAKECMDGOALS)))
 

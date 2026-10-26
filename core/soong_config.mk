@@ -63,6 +63,9 @@ $(call add_json_str,  BuildType,                         $(TARGET_BUILD_TYPE))
 
 $(call add_json_str,  DeviceName,                        $(TARGET_DEVICE))
 $(call add_json_str,  DeviceProduct,                     $(TARGET_PRODUCT))
+$(call add_json_str,  MockDeviceName,                    $(if $(strip $(MOCK_TARGET_DEVICE)),$(MOCK_TARGET_DEVICE),$(TARGET_DEVICE)))
+$(call add_json_str,  MockDeviceProduct,                 $(if $(strip $(MOCK_TARGET_PRODUCT)),$(MOCK_TARGET_PRODUCT),$(TARGET_PRODUCT)))
+
 $(call add_json_str,  DeviceArch,                        $(TARGET_ARCH))
 $(call add_json_str,  DeviceArchVariant,                 $(TARGET_ARCH_VARIANT))
 $(call add_json_str,  DeviceCpuVariant,                  $(TARGET_CPU_VARIANT))
@@ -220,7 +223,7 @@ $(call add_json_list, BoardSepolicyM4Defs,               $(BOARD_SEPOLICY_M4DEFS
 $(call add_json_str,  BoardSepolicyVers,                 $(BOARD_SEPOLICY_VERS))
 $(call add_json_list, SystemExtSepolicyPrebuiltApiDirs,  $(BOARD_SYSTEM_EXT_SEPOLICY_PREBUILT_DIRS))
 $(call add_json_list, ProductSepolicyPrebuiltApiDirs,    $(BOARD_PRODUCT_SEPOLICY_PREBUILT_DIRS))
-$(call add_json_str,  BoardPlatform,                     $(TARGET_BOARD_PLATFORM))
+$(call add_json_str,  BoardPlatform,                     $(if $(strip $(MOCK_TARGET_BOARD_PLATFORM)),$(MOCK_TARGET_BOARD_PLATFORM),$(TARGET_BOARD_PLATFORM)))
 
 $(call add_json_str,  PlatformSepolicyVersion,           $(PLATFORM_SEPOLICY_VERSION))
 $(call add_json_list, PlatformSepolicyCompatVersions,    $(PLATFORM_SEPOLICY_COMPAT_VERSIONS))
@@ -329,10 +332,10 @@ $(call add_json_list, SourceRootDirs,             $(PRODUCT_SOURCE_ROOT_DIRS))
 
 $(call add_json_list, AfdoProfiles,                $(ALL_AFDO_PROFILES))
 
-$(call add_json_str,  ProductManufacturer, $(PRODUCT_MANUFACTURER))
-$(call add_json_str,  ProductBrand,        $(PRODUCT_BRAND))
-$(call add_json_str,  ProductDevice,       $(PRODUCT_DEVICE))
-$(call add_json_str,  ProductModel,        $(PRODUCT_MODEL))
+$(call add_json_str,  ProductManufacturer, $(if $(strip $(MOCK_PRODUCT_MANUFACTURER)),$(MOCK_PRODUCT_MANUFACTURER),$(PRODUCT_MANUFACTURER)))
+$(call add_json_str,  ProductBrand,        $(if $(strip $(MOCK_PRODUCT_BRAND)),$(MOCK_PRODUCT_BRAND),$(PRODUCT_BRAND)))
+$(call add_json_str,  ProductDevice,       $(if $(strip $(MOCK_TARGET_DEVICE)),$(MOCK_TARGET_DEVICE),$(PRODUCT_DEVICE)))
+$(call add_json_str,  ProductModel,        $(if $(strip $(MOCK_PRODUCT_MODEL)),$(MOCK_PRODUCT_MODEL),$(PRODUCT_MODEL)))
 
 $(call add_json_str, ReleaseVersion,    $(_RELEASE_VERSION))
 $(call add_json_list, ReleaseAconfigValueSets,    $(RELEASE_ACONFIG_VALUE_SETS))
