@@ -1370,7 +1370,7 @@ BUILD_VERSION_TAGS := $(subst $(space),$(comma),$(sort $(BUILD_VERSION_TAGS)))
 # BUILD_FINGERPRINT is used to uniquely identify the combined build and product;
 # used by the OTA server.
 ifeq (,$(strip $(BUILD_FINGERPRINT)))
-  BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(TARGET_PRODUCT)/$(TARGET_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_FROM_FILE):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
+  BUILD_FINGERPRINT := $(if $(strip $(MOCK_PRODUCT_BRAND)),$(MOCK_PRODUCT_BRAND),$(PRODUCT_BRAND))/$(if $(strip $(MOCK_TARGET_PRODUCT)),$(MOCK_TARGET_PRODUCT),$(TARGET_PRODUCT))/$(if $(strip $(MOCK_TARGET_DEVICE)),$(MOCK_TARGET_DEVICE),$(TARGET_DEVICE)):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_FROM_FILE):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
 endif
 
 # In order to allow product-config to be run in parallel for multiple lunch targets, the build_fingerprint file is product-specific.
@@ -1409,7 +1409,7 @@ BUILD_THUMBPRINT :=
 # the BUILD_THUMBPRINT, it includes system image attributes to uniquely identify
 # the system image; This purposefully excludes any product-specific variables.
 ifeq (,$(strip $(BUILD_SYSTEM_FINGERPRINT)))
-  BUILD_SYSTEM_FINGERPRINT := $(PRODUCT_SYSTEM_BRAND)/$(PRODUCT_SYSTEM_NAME)/$(PRODUCT_SYSTEM_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_FROM_FILE):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
+  BUILD_SYSTEM_FINGERPRINT := $(if $(strip $(MOCK_PRODUCT_SYSTEM_BRAND)),$(MOCK_PRODUCT_SYSTEM_BRAND),$(PRODUCT_SYSTEM_BRAND))/$(if $(strip $(MOCK_PRODUCT_SYSTEM_NAME)),$(MOCK_PRODUCT_SYSTEM_NAME),$(PRODUCT_SYSTEM_NAME))/$(if $(strip $(MOCK_PRODUCT_SYSTEM_DEVICE)),$(MOCK_PRODUCT_SYSTEM_DEVICE),$(PRODUCT_SYSTEM_DEVICE)):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_FROM_FILE):$(TARGET_BUILD_VARIANT)/$(BUILD_VERSION_TAGS)
 endif
 
 # In order to allow product-config to be run in parallel for multiple lunch targets, the build_system_fingerprint file is product-specific.
